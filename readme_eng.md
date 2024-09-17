@@ -1,0 +1,193 @@
+# HoloCubic
+
+* Refer to Zhihuijun's project address: https://github.com/peng-zhihui/HoloCubic.git
+
+* Refer to ClimbSnail's project address: https://github.com/ClimbSnail/HoloCubic_AIO
+
+* Reference tutorial UP: Don't laugh at me if I know the autumn from a single leaf https://www.bilibili.com/video/BV11h41147iJ
+
+## Introduction
+
+### Foreword
+
+I recently saw Zhihuijun's HoloCubic small TV on Station B, which I think is very cool. I just finished my work training and have a certain understanding of PCB board patch, welding and assembly, so I plan to learn Zhihuijun's HoloCubic project and successfully copy it. Of course, I hope to learn some knowledge in this process, which can be regarded as my first project on github! ! !
+
+### Finished product display
+
+![](/images/y_1.jpg)
+
+## Hardware part
+
+The software required for the hardware part is Altium Designer, which is a perfect integration of schematic design, circuit simulation, PCB drawing and editing, topology logic automatic wiring, signal integrity analysis and design output technologies. It provides designers with a new design solution, allowing designers to easily design. Proficient use of this software can greatly improve the quality and efficiency of circuit design.
+
+### Download of HoloCubic project
+
+First, you need to download Zhihuijun's HoloCubic project from github. You need to use git to download the project from github. You need to learn some git commands here. You can go directly to https://git-scm.com/download/win to download and install.
+
+![](/images/git_1.png)
+
+After the installation is complete, create a new folder and open git in the folder (you can right-click to open git and select Git Bash Here). The following window will pop up.
+
+![](/images/git_2.png)
+
+Then enter the command to download the project. Find the github address of the source project, enter it and click Code. You will find an ssh address and copy it.
+
+![](/images/github_1.png)
+
+Then return to the git that has just been opened on the desktop, enter the command to download, the download speed may be a little slow, I used VPN so it may be slightly faster.
+
+```git
+git clone https://github.com/peng-zhihui/HoloCubic.git
+```
+
+This command is to download the remote warehouse HoloCubic to the current directory. When copying the project address to git, you cannot use the original paste. You will use `Shift+Insert` to copy the address to git, and then wait for the download to complete.
+
+![](/images/3.png)
+
+Wait for downloading. The downloaded folder contains all the files of the project, which can be opened and used with the corresponding software.
+
+### Purchase of components
+
+First, we use Altium Designer to open the first folder of the hardware. The file path should be ~\HoloCubic\1.Hardware\Naive Version\HoloCubic-Assembled. The following part of the address is the same.
+
+![](/images/4.png)
+
+After opening, click `Projects` to see the project file. Then you need to output the component list. Click `ExtendBoard.PcbDoc` to see the PCB diagram of the board. Press `3` to display the 3D image of the board. In 3D mode, hold down the right mouse button to drag, `right mouse button + Shift` can flip the view, `Ctrl + mouse wheel` can zoom in and out. Similarly, in `2` mode, except for flipping, everything else is the same. In 2D mode, press `Bill of Materials` in `Reports` to output the component list.
+
+![](/images/6.png)
+
+After clicking `Bill of Materials` in `Reports`, finally click `Export` to save to the specified location for viewing.
+
+![](/images/7.png)
+
+Similarly, the same operation is used to output the components of MainBoard.PcbDoc.
+
+![](/images/8.png)
+
+So far, we have found the PCB diagrams of the two boards and the component list to be purchased. You can buy components through daily online shopping software or from Jiali Chuang. The following is the component list I summarized and the price of buying from Jiali Chuang for reference only.
+
+![](/images/1.png)
+
+![](/images/9.png)
+
+### Printing of PCB boards
+
+I chose Jiali Chuang to print PCB boards. I ordered PCBs online and it was recommended by a friend because I had never printed PCB boards before. Jiali Chuang seems to have several free printings for novices. Hehe, I mainly want to get it for free! Ha~ Just submit the circuit diagrams of 2 PCB boards as required (I have already packaged **2. Gerber submitted for board making **), and submit them separately.
+
+![](/images/2.png)
+
+This website feels so advanced, you can see the real-time progress of the production, and you can see the live broadcast of the production workshop on the official account. It feels very fun to make a board for the first time, maybe it’s because I’m new to hardware!
+
+![](/images/10.png)
+
+When making a board, you submit PCB, or you can submit Gerber, which can minimize the risk of some unknown errors and effectively solve the compatibility issues caused by different software versions. The following is a picture of the board generated by submitting the board. There are two boards here.
+
+<img src="/images/实物模拟图.png" style="zoom:50%;" />
+
+<img src="/images/实物模拟图_2.png" style="zoom:50%;" />
+
+### Purchase of welding tools
+
+Because I have never welded a circuit board before, I don't have these tools. I simply bought some necessary things. You can refer to it.
+
+![](/images/5.png)
+
+## Software part
+
+### Compile ESP32 firmware
+
+Open VS Code and successfully compile Zhihuijun's ESP32 firmware. Select the new project of PIO Home and select New as shown below.
+
+![](/images/ESP_1.png)
+
+The first time you create a new firmware project, it will be very slow. Since the server of PIO Home is in a foreign country, you need to climb over the wall and wait for the installation of the relevant configuration environment.
+
+![](/images/Q_2.png)
+
+After successfully opening, click the check mark in the lower left corner and compile it. If the successful compilation shows SUCCESS, it means that the environment has been successfully installed and you can proceed to the next step.
+
+![](/images/ESP_2.png)
+
+After completing the previous steps, we open Zhihuijun's process project, select the file in the upper right corner, open the folder, open the address of the relevant project, and select Yes during the opening process to indicate that we trust it.
+
+![](/images/ESP_3.png)
+
+Then, find the main function of the project and compile it. As for downloading `Upload` to the board, wait until the board is soldered before downloading.
+
+![](/images/ESP_4.png)
+
+### Emulate LVGL with VS Code
+
+The advantage of installing this emulation environment is that you don't have to download the program to the board every moment to see the running status. With this emulation, you can debug on the computer. After debugging, download it to the board, which is very convenient. The first step is to download the MSYS2 configuration environment. The download address of MSYS2 is: https://www.msys2.org/. Just install it in the next step.
+
+![](/images/ESYS2.png)
+
+After installation, execute the command `pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-SDL2` in the ESYS2 software and select Y to wait for the configuration to complete.
+
+![](/images/ESYS.png)
+
+Next, configure the environment variables of ESYS2. Search and open the Edit System Environment Variables on your computer. Select Path in System Variables. Click New. Enter C:\msys64\mingw64\bin. After entering, click Confirm.
+
+![](/images/ESYS_2.png)
+
+Next, go to https://github.com/Sakulaczx/platfrmioSimLvgl to download the **2_2.platfrmioSimLvgl** project. After downloading, just open the folder.
+
+![](/images/PIO_ESYS_1.png)
+
+Click the check mark in the lower left corner of VS Code to compile. After the compilation is successful, directly upload the download and run it successfully.
+
+![](/images/LV_2.png)
+
+Modify the source code demo.c, restore the code from lines 90 to 140, and comment out the code from line 88. Then the following figure will be displayed.
+
+![](/images/LV_3.png)
+
+Using VS Code to simulate LVGL is considered successful.
+
+### Open 3D model with Fusion 360
+
+You can download Fusion 360 from the official website. Students can enjoy free educational discounts. After downloading, you can click the file in the upper right corner.
+
+![](/images/F_1.png)
+
+Then open the 3D file at the specified location, as shown below.
+
+![](/images/F_2.png)
+
+After opening, press the middle mouse wheel to move the model position, slide the wheel to zoom in and out, and press `Shift + middle wheel` to flip the 3D view.
+
+![](/images/F_3.png)
+
+### Practice
+
+#### Draw an ExtandBoard with AD
+
+While waiting for the components, you can learn to draw AD and use Altium Designer to draw the schematic and PCB diagrams according to Zhihuijun's circuit board. In this process, you can learn the simple use of Altium Designer and the drawing of schematics and PCB diagrams. For related reference steps, you can go to CSDN https://blog.csdn.net/qq_45459526/category_11536027.html?spm=1001.2014.3001.5482 to view.
+
+#### Draw a component with Fusion 360
+
+CSDN https://blog.csdn.net/qq_45459526/article/details/121959702?spm=1001.2014.3001.5501 View.
+
+## Welding
+
+The welding process requires carefulness because the components are very small.
+
+![](/images/H1.jpg)
+
+![](/images/H3.jpg)
+
+![](/images/H2.jpg)
+
+![](/images/H4.jpg)
+
+## Assembly
+
+![](/images/p_2.jpg)
+
+![](/images/p_1.jpg)
+
+ps: The shell needs screws, but in the end I had no choice but to use UV glue to cure it, which is also possible.
+
+## Work demonstration
+
+Demonstration video can be found at: https://b23.tv/eteRlfE
